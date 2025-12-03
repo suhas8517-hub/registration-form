@@ -3,56 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
+    <title>Professional Registration Form</title>
+
     <style>
         body {
-            background: #f2f2f2;
-            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            font-family: "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 0;
         }
+
         .container {
             width: 450px;
-            background: white;
-            padding: 25px;
+            background: #fff;
+            padding: 30px;
             margin: 50px auto;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
+
         h2 {
             text-align: center;
             margin-bottom: 20px;
+            font-size: 26px;
         }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-top: 10px;
+        }
+
         input, select {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #aaa;
-            border-radius: 5px;
+            padding: 12px;
+            margin: 6px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
         }
+
+        input[type="file"] {
+            padding: 5px;
+        }
+
         button {
             width: 100%;
-            padding: 12px;
-            background: #007bff;
-            color: white;
+            padding: 14px;
+            background: #0066ff;
             border: none;
-            border-radius: 5px;
+            color: #fff;
+            font-size: 18px;
+            border-radius: 8px;
             cursor: pointer;
+            margin-top: 5px;
         }
+
         button:hover {
-            background: #0055cc;
+            background: #0047cc;
         }
-        .success-box {
+
+        .success {
+            width: 480px;
+            margin: 40px auto;
             background: white;
-            width: 450px;
-            margin: 50px auto;
-            padding: 25px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            object-fit: cover;
+            border: 2px solid #ccc;
+        }
+
+        .center {
+            text-align: center;
         }
     </style>
 </head>
+
 <body>
 
-    <div class="container" id="formContainer">
+    <div class="container" id="formPage">
         <h2>Registration Form</h2>
 
         <form id="regForm">
@@ -78,12 +114,15 @@
             <label>Address</label>
             <input id="address" type="text" required>
 
+            <label>Upload Photo</label>
+            <input id="photo" type="file" accept="image/*" required>
+
             <button type="submit">Register</button>
         </form>
     </div>
 
     <script>
-        document.getElementById("regForm").addEventListener("submit", function(event) {
+        document.getElementById("regForm").addEventListener("submit", function (event) {
             event.preventDefault();
 
             let name = document.getElementById("name").value;
@@ -93,15 +132,24 @@
             let dob = document.getElementById("dob").value;
             let address = document.getElementById("address").value;
 
+            let photoFile = document.getElementById("photo").files[0];
+            let photoURL = URL.createObjectURL(photoFile);
+
             document.body.innerHTML = `
-                <div class="success-box">
-                    <h2>Registration Successful 🎉</h2>
+                <div class="success">
+                    <h2 class="center">🎉 Registration Successful</h2>
+
+                    <div class="center">
+                        <img src="${photoURL}" class="profile-img">
+                    </div>
+
                     <p><strong>Name:</strong> ${name}</p>
                     <p><strong>Email:</strong> ${email}</p>
                     <p><strong>Phone:</strong> ${phone}</p>
                     <p><strong>Gender:</strong> ${gender}</p>
                     <p><strong>Date of Birth:</strong> ${dob}</p>
                     <p><strong>Address:</strong> ${address}</p>
+
                     <br>
                     <a href="index.html">
                         <button>Back to Form</button>
@@ -113,5 +161,4 @@
 
 </body>
 </html>
-
 
